@@ -36,6 +36,7 @@ const App = () => {
   useEffect(() => {
     const getCities = async () => {
       const citiesFromServer = await fetchCities();
+      console.log(citiesFromServer);
       setCities(citiesFromServer);
     };
 
