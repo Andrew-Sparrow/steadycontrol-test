@@ -5,18 +5,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 
-import {
-  Container,
-} from '@material-ui/core';
-
-import AddNewTaskContainer from './components/AddNewTaskContainer';
-
-import Header from './components/Header';
-import Tasks from './components/Tasks';
-import NoTasks from './components/NoTasks';
-import Footer from './components/Footer';
-import About from './components/About';
-
 axios.defaults.baseURL = `${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}`;
 axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.responseType = 'json';
@@ -30,24 +18,29 @@ window.addEventListener('offline', () => {
 });
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [citizens, setCitizens] = useState([]);
 
-  const fetchTasks = async () => {
+  const fetchCities = async () => {
     const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/cities`);
 
     return response.data;
   };
 
+  const fetchCitizens = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/citizens`);
+
+    return response.data;
+  };
 
   useEffect(() => {
-    const getTasks = async () => {
-      const tasksFromServer = await fetchTasks();
-      setTasks(tasksFromServer);
+    const getCities = async () => {
+      const citiesFromServer = await fetchCities();
+      setCities(citiesFromServer);
     };
 
-    getTasks();
+    getCities();
   }, []);
-
 
   return (
     <Router>
@@ -63,10 +56,10 @@ const App = () => {
           render={() => (
             <>
               <AddNewTaskContainer onAdd={addTask} />
-              {tasks.length > 0
+              {cities.length > 0
                 ? (
                   <Tasks
-                    tasks={tasks}
+                    tasks={cities}
                     onDelete={deleteTask}
                     onToggleCompleted={toggleCompleted}
                     editTaskText={editTaskText}
