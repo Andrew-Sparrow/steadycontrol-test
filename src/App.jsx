@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import {createStructure} from "./utils/utils";
 import RecursiveTreeView from "./components/RecursiveTreeView"
-
-const useStyles = makeStyles({
-  root: {
-    height: 110,
-    flexGrow: 1,
-    maxWidth: 400,
-  },
-});
 
 const data = {
   id: 'root',
