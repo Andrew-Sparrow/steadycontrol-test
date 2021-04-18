@@ -1,9 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
 import axios from 'axios';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/Header';
 import './App.css';
+import {createStructure} from "./utils/utils";
+import RecursiveTreeView from "./components/RecursiveTreeView"
+
+const useStyles = makeStyles({
+  root: {
+    height: 110,
+    flexGrow: 1,
+    maxWidth: 400,
+  },
+});
+
+const data = {
+  id: 'root',
+  name: 'Parent',
+  children: [
+    {
+      id: '1',
+      name: 'Child - 1',
+    },
+    {
+      id: '3',
+      name: 'Child - 3',
+      children: [
+        {
+          id: '4',
+          name: 'Child - 4',
+        },
+      ],
+    },
+  ],
+};
 
 window.addEventListener('online', () => {
   document.title = document.title.replace(' [offline]', '');
@@ -15,6 +47,7 @@ window.addEventListener('offline', () => {
 
 const App = () => {
   const [cities, setCities] = useState([]);
+  const [citizens, setCitizens] = useState([]);
 
   const fetchCities = async () => {
     const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/cities`);
@@ -40,7 +73,9 @@ const App = () => {
   useEffect(() => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
-      setCities(citizensFromServer);
+      setCitizens(citizensFromServer);
+
+      console.log(createStructure(citizensFromServer));
     };
 
     getCitizens();
@@ -49,7 +84,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <RecursiveTreeView data={data}/>
     </>
   );
 };
