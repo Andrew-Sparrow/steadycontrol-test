@@ -18,26 +18,38 @@ const useStyles = makeStyles({
 export default function RecursiveTreeView(props) {
   const classes = useStyles();
 
-  const renderTree = (nodes) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-      {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
-    </TreeItem>
-  );
+  const renderTree = (nodes) => {
+    console.log(nodes);
+    return (
+      <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+        {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+      </TreeItem>
+    );
+  };
+
+  const renderParent = (items) => {
+    return items.map((item) => {
+      return (
+        <TreeItem key={item.id} nodeId={(item.id).toString()} label={item.name} >
+          {Array.isArray(item.children) ? item.children.map((child) => renderTree(child)) : null}
+        </TreeItem>
+      )
+    });
+  };
 
   return (
     <TreeView
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpanded={['root']}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      {renderTree(props.data)}
+      {renderParent(props.data)}
     </TreeView>
   );
 }
 
 RecursiveTreeView.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 
 RecursiveTreeView.defaultProps = {

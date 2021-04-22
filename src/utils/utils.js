@@ -1,50 +1,37 @@
-// export const createStructure = (items) => {
-//   return items.reduce((accumulator, item) => {
-//     item.groups.forEach((point, index) => {
-//       let nextPointIndex = index + 1;
-//
-//       if(index < item.groups.length - 1) {
-//         let newPoint = {};
-//         return accumulator[point.name] = newPoint;
-//         // return accumulator[point.name] = newPoint[point[nextPointIndex].name];
-//       } else {
-//         return accumulator;
-//       }
-//     });
-//     return accumulator;
-//   }, {});
-// };
-
 
 export const createStructure = (items) => {
   const cityEntities = new Map();
+  const parentsId = {};
 
   return items.reduce((accumulator, item) => {
-    item.groups.forEach((cityEntity, index) => {
-      let nextPointIndex = index + 1;
+    let currentId = 0;
 
-      if (index < item.groups.length - 1) {
-          // cityEntities.set(cityEntity.name, Object.assign({}, {[item.groups[nextPointIndex].name]: {}}));
-        // cityEntities.set(cityEntity.name, Object.assign({}, {[item.groups[nextPointIndex].name]: {}}));
-        // console.log(cityEntities);
-        console.log(item.groups[nextPointIndex].name);
-        return accumulator[cityEntity.name] = Object.assign({}, {[item.groups[nextPointIndex].name]: {}});
+    item.groups.forEach((cityEntity, index) => {
+      if(index > 0) {
+        cityEntities.set(currentId, Object.assign({}, {
+            id: currentId,
+            type: cityEntity.type,
+            name: cityEntity.name,
+            childrenId: []
+          })
+        );
+        cityEntities.get(currentId - 1).childrenId = [...cityEntities.get(currentId - 1).childrenId, currentId];
       } else {
-        // cityEntities.set(cityEntity.name, Object.assign({}, {[item.groups[index].name]: []}));
-        return accumulator[cityEntity.name] = Object.assign({}, {[item.groups[index].name]: []});
+        cityEntities.set(currentId, Object.assign({}, {
+          id: currentId,
+          type: cityEntity.type,
+          name: cityEntity.name,
+          childrenId: []
+        }));
       }
+
+      currentId++;
+      return accumulator[cityEntity.name] = 1;
+
       // return accumulator[cityEntity.name] = newPoint[cityEntity[nextPointIndex].name];
 
     });
+    console.log(cityEntities);
     return accumulator;
   }, {});
 };
-
-// const getPointStructure = (items) => {
-//   return items.reduce((accumulator, item, index) => {
-//     let newPoint = {};
-//     newPoint[items[index + 1].name] = {};
-//     accumulator[item.name] = newPoint;
-//     return accumulator[item.name] = ;
-//   }, {});
-// };
