@@ -1,36 +1,39 @@
 export const createStructure = (items) => {
-  const cityEntities = new Map();
+  const cityEntities = {};
+  let currentParent = null;
 
   return items.reduce((accumulator, item) => {
     let currentId = 0;
 
     item.groups.forEach((cityEntity, index) => {
-      if(index > 0) {
-        const currentItem = Object.assign({}, {
-          id: currentId,
-          type: cityEntity.type,
-          name: cityEntity.name,
-          children: []
-        });
-        if(index === item.groups.length - 1) {
-          // if last item
-          currentItem.children.push(item.name);
+      if(index === 0) {
+        if(Object.keys(cityEntities).includes(cityEntity.name)) {
+          return;
+        } else {
+          cityEntities[cityEntity.name] = Object.assign({}, {
+            id: currentId,
+            type: cityEntity.type,
+            name: cityEntity.name,
+            children: []
+          });
+          accumulator.push(cityEntities[cityEntity.name]);
+          currentId++;
         }
-        cityEntities.set(currentId, currentItem);
-        cityEntities.get(currentId - 1).children = [...cityEntities.get(currentId - 1).children, currentItem];
+        currentParent = cityEntities[cityEntity.name];
       } else {
-        // if(cityEntities.) {
-        // }
-        cityEntities.set(currentId, Object.assign({}, {
-          id: currentId,
-          type: cityEntity.type,
-          name: cityEntity.name,
-          children: []
-        }));
-        accumulator.push(cityEntities.get(currentId));
+        if(currentParent.children.some((element) => element.name === cityEntity.name)) {
+          return;
+        } else {
+          const currentElement = Object.assign({}, {
+            id: currentId,
+            type: cityEntity.type,
+            name: cityEntity.name,
+            children: []
+          });
+          currentParent.children.push();
+          currentParent = currentElement;
+        }
       }
-
-      currentId++;
     });
     console.log(cityEntities);
     return accumulator;
