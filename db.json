@@ -35,6 +35,44 @@
           "name": "Гашека ул."
         }
       ]
+    },
+    {
+      "id": 1,
+      "name": "Степан",
+      "city_id": 1,
+      "groups": [
+        {
+          "type": "city",
+          "name": "Москва г."
+        },
+        {
+          "type": "district",
+          "name": "Пресненский р-н"
+        },
+        {
+          "type": "street",
+          "name": "Рочдельская ул."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Виктор",
+      "city_id": 1,
+      "groups": [
+        {
+          "type": "city",
+          "name": "Москва г."
+        },
+        {
+          "type": "district",
+          "name": "Коптево р-н"
+        },
+        {
+          "type": "street",
+          "name": "Нарвская ул."
+        }
+      ]
     }
   ]
 }
