@@ -1,41 +1,47 @@
+const createCityElement = (id, cityEntity) => {
+  return Object.assign({}, {
+    id,
+    type: cityEntity.type,
+    name: cityEntity.name,
+    children: [],
+  });
+};
+
 export const createStructure = (items) => {
-  const cityEntities = {};
   let currentParent = null;
 
   return items.reduce((accumulator, item) => {
     let currentId = 0;
 
-    item.groups.forEach((cityEntity, index) => {
+    item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
-        if(Object.keys(cityEntities).includes(cityEntity.name)) {
+        let currentGrandParent = accumulator.find((element) => element.name === cityEntity.name);
+        if(currentGrandParent && currentGrandParent.name === cityEntity.name) {
+          currentParent = currentGrandParent;
           return;
         } else {
-          cityEntities[cityEntity.name] = Object.assign({}, {
-            id: currentId,
-            type: cityEntity.type,
-            name: cityEntity.name,
-            children: []
-          });
-          accumulator.push(cityEntities[cityEntity.name]);
+          let grandParent = createCityElement(currentId, cityEntity);
+          accumulator.push(grandParent);
           currentId++;
+          currentParent = grandParent;
         }
-        currentParent = cityEntities[cityEntity.name];
       } else {
-        if(currentParent.children.some((element) => element.name === cityEntity.name)) {
+        let currentChild = currentParent.children.find((element) => element.name === cityEntity.name);
+        if(currentChild && currentChild.name === cityEntity.name) {
+          currentParent = currentChild;
           return;
         } else {
-          const currentElement = Object.assign({}, {
-            id: currentId,
-            type: cityEntity.type,
-            name: cityEntity.name,
-            children: []
-          });
-          currentParent.children.push();
+          const currentElement = createCityElement(currentId, cityEntity);
+
+          currentParent.children.push(currentElement);
+          currentId++;
           currentParent = currentElement;
+          if(index === list.length - 1) {
+            currentParent.children.push(item.name);
+          }
         }
       }
     });
-    console.log(cityEntities);
     return accumulator;
   }, []);
 };
