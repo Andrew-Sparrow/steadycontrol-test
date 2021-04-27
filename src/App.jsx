@@ -7,53 +7,6 @@ import {createStructure} from "./utils/utils";
 
 import RecursiveTreeView from "./components/RecursiveTreeView";
 
-const data = [
-  {
-    id: '1',
-    name: 'Child - 1',
-    children: [
-      {
-        id: '2',
-        name: 'Child - 2',
-        children: []
-      },
-      {
-        id: '3',
-        name: 'Child - 3',
-        children: [
-          {
-            id: '4',
-            name: 'Child - 4',
-            children: [],
-          },
-        ],
-      },
-    ]
-  },
-  {
-    id: '5',
-    name: 'Child - 5',
-    children: [
-      {
-        id: '6',
-        name: 'Child - 6',
-        children: [],
-      },
-      {
-        id: '7',
-        name: 'Child - 7',
-        children: [
-          {
-            id: '8',
-            name: 'Child - 8',
-            children: [],
-          },
-        ],
-      },
-    ],
-  }
-];
-
 window.addEventListener('online', () => {
   document.title = document.title.replace(' [offline]', '');
 });
@@ -92,8 +45,6 @@ const App = () => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
       setCitizens(citizensFromServer);
-      console.log(citizensFromServer);
-      console.log(createStructure(citizensFromServer));
       setDataStructure(createStructure(citizensFromServer));
     };
 
@@ -102,7 +53,7 @@ const App = () => {
 
   return (
     <>
-      <RecursiveTreeView data={dataStructure}/>
+      <RecursiveTreeView dataTree={dataStructure.data} idList={dataStructure.idList}/>
     </>
   );
 };

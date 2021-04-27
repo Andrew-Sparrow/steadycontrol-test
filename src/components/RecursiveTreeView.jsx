@@ -41,16 +41,19 @@ export default function RecursiveTreeView(props) {
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      defaultExpanded={props.idList}
     >
-      {renderParent(props.data)}
+      {renderParent(props.dataTree)}
     </TreeView>
   );
 }
 
 RecursiveTreeView.propTypes = {
-  data: PropTypes.array,
+  dataTree: PropTypes.array,
+  idList: PropTypes.array
 };
 
 RecursiveTreeView.defaultProps = {
-  data: null,
+  dataTree: null,
+  idList: [],
 };

@@ -18,8 +18,9 @@ const createCitizen = (citizen) => {
 export const createStructure = (items) => {
   let currentParent = null;
   let currentId = 0;
+  const idList = [];
 
-  return items.reduce((accumulator, item) => {
+  const dataStructure = items.reduce((accumulator, item) => {
 
     item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
@@ -30,6 +31,7 @@ export const createStructure = (items) => {
         } else {
           let grandParent = createCityElement(currentId, cityEntity);
           accumulator.push(grandParent);
+          idList.push(grandParent.id);
           ++currentId;
           currentParent = grandParent;
         }
@@ -42,6 +44,8 @@ export const createStructure = (items) => {
           const currentElement = createCityElement(currentId, cityEntity);
 
           currentParent.children.push(currentElement);
+          idList.push(currentElement.id);
+
           ++currentId;
           currentParent = currentElement;
           if(index === list.length - 1) {
@@ -53,4 +57,11 @@ export const createStructure = (items) => {
     });
     return accumulator;
   }, []);
+
+  console.log(dataStructure);
+
+  return {
+    data: dataStructure,
+    idList: idList
+  };
 };
