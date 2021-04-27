@@ -1,6 +1,6 @@
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
-    id: id,
+    id: id.toString(),
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],
