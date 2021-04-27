@@ -21,7 +21,7 @@ export default function RecursiveTreeView(props) {
   const renderTree = (nodes) => {
     return (
       <TreeItem key={nodes.id} nodeId={(nodes.id)} label={nodes.name}>
-        {/*{(nodes.children.length !== 0) ? nodes.children.map((node) => renderTree(node)) : null}*/}
+        {(Array.isArray(nodes.children) || ((Array.isArray(nodes.children) && nodes.children.length !== 0))) ? nodes.children.map((node) => renderTree(node)) : null}
       </TreeItem>
     );
   };

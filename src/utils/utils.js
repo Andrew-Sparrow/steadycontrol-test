@@ -1,9 +1,17 @@
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
-    id: id.toString(),
+    id: id.toString().concat('-cityItem'),
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],
+  });
+};
+
+const createCitizen = (citizen) => {
+  return Object.assign({}, {
+    id: (citizen.id).toString().concat('-citizen'),
+    type: 'citizen',
+    name: citizen.name,
   });
 };
 
@@ -37,7 +45,8 @@ export const createStructure = (items) => {
           ++currentId;
           currentParent = currentElement;
           if(index === list.length - 1) {
-            currentParent.children.push(item.name);
+            const newCitizen = createCitizen(item);
+            currentParent.children.push(newCitizen);
           }
         }
       }
