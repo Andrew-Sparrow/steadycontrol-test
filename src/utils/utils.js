@@ -18,9 +18,11 @@ const createCitizen = (citizen) => {
 export const createStructure = (items) => {
   let currentParent = null;
   let currentId = 0;
-  const idList = [];
 
-  const dataStructure = items.reduce((accumulator, item) => {
+  const idList = [];
+  let structure;
+
+  structure = items.reduce((accumulator, item) => {
 
     item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
@@ -58,10 +60,8 @@ export const createStructure = (items) => {
     return accumulator;
   }, []);
 
-  console.log(dataStructure);
-
   return {
-    data: dataStructure,
-    idList: idList
+    structure,
+    idList
   };
 };
