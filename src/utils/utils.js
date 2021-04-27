@@ -1,6 +1,6 @@
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
-    id,
+    id: id,
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],
@@ -9,9 +9,9 @@ const createCityElement = (id, cityEntity) => {
 
 export const createStructure = (items) => {
   let currentParent = null;
+  let currentId = 0;
 
   return items.reduce((accumulator, item) => {
-    let currentId = 0;
 
     item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
@@ -22,7 +22,7 @@ export const createStructure = (items) => {
         } else {
           let grandParent = createCityElement(currentId, cityEntity);
           accumulator.push(grandParent);
-          currentId++;
+          ++currentId;
           currentParent = grandParent;
         }
       } else {
@@ -34,7 +34,7 @@ export const createStructure = (items) => {
           const currentElement = createCityElement(currentId, cityEntity);
 
           currentParent.children.push(currentElement);
-          currentId++;
+          ++currentId;
           currentParent = currentElement;
           if(index === list.length - 1) {
             currentParent.children.push(item.name);

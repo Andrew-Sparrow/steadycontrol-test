@@ -5,7 +5,7 @@ import axios from 'axios';
 import './App.css';
 import {createStructure} from "./utils/utils";
 
-import RecursiveTreeView from "./components/RecursiveTreeView"
+import RecursiveTreeView from "./components/RecursiveTreeView";
 
 const data = [
   {
@@ -15,6 +15,7 @@ const data = [
       {
         id: '2',
         name: 'Child - 2',
+        children: []
       },
       {
         id: '3',
@@ -23,6 +24,7 @@ const data = [
           {
             id: '4',
             name: 'Child - 4',
+            children: [],
           },
         ],
       },
@@ -35,6 +37,7 @@ const data = [
       {
         id: '6',
         name: 'Child - 6',
+        children: [],
       },
       {
         id: '7',
@@ -43,6 +46,7 @@ const data = [
           {
             id: '8',
             name: 'Child - 8',
+            children: [],
           },
         ],
       },
@@ -61,6 +65,7 @@ window.addEventListener('offline', () => {
 const App = () => {
   const [cities, setCities] = useState([]);
   const [citizens, setCitizens] = useState([]);
+  const [dataStructure, setDataStructure] = useState([]);
 
   const fetchCities = async () => {
     const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/cities`);
@@ -87,17 +92,17 @@ const App = () => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
       setCitizens(citizensFromServer);
-
+      console.log(citizensFromServer);
       console.log(createStructure(citizensFromServer));
+      setDataStructure(createStructure(citizensFromServer));
     };
 
     getCitizens();
   }, []);
 
-
   return (
     <>
-      <RecursiveTreeView data={data}/>
+      <RecursiveTreeView data={dataStructure}/>
     </>
   );
 };

@@ -20,8 +20,8 @@ export default function RecursiveTreeView(props) {
 
   const renderTree = (nodes) => {
     return (
-      <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-        {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+      <TreeItem key={nodes.id} nodeId={(nodes.id)} label={nodes.name}>
+        {/*{(nodes.children.length !== 0) ? nodes.children.map((node) => renderTree(node)) : null}*/}
       </TreeItem>
     );
   };
@@ -29,8 +29,8 @@ export default function RecursiveTreeView(props) {
   const renderParent = (items) => {
     return items.map((item) => {
       return (
-        <TreeItem key={item.id} nodeId={(item.id).toString()} label={item.name} >
-          {Array.isArray(item.children) ? item.children.map((child) => renderTree(child)) : null}
+        <TreeItem key={item.id} nodeId={(item.id)} label={item.name} >
+          {(item.children.length !== 0) ? item.children.map((child) => renderTree(child)) : null}
         </TreeItem>
       )
     });
