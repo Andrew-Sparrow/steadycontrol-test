@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <>
-      <RecursiveTreeView dataTree={dataStructure.structure} defaultExpanded={dataStructure.idList}/>
+      <RecursiveTreeView dataTree={dataStructure.structure} expanded={dataStructure.idList}/>
     </>
   );
 };

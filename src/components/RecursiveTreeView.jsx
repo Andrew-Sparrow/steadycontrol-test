@@ -41,7 +41,8 @@ export default function RecursiveTreeView(props) {
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
-      defaultExpanded={["0-cityItem", "1-cityItem", "2-cityItem", "3-cityItem", "4-cityItem", "5-cityItem"]}
+      defaultExpanded={['0-cityItem', '1-cityItem', '2-cityItem', '3-cityItem', '4-cityItem']}
+      // defaultExpanded={props.expanded ? props.expanded : []}
     >
       {renderParent(props.dataTree ? props.dataTree : [])}
     </TreeView>
