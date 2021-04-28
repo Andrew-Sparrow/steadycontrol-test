@@ -18,6 +18,8 @@ const createCitizen = (citizen) => {
 export const createStructure = (items) => {
   let currentParent = null;
   let currentId = 0;
+  let currentGrandParent;
+  let currentChild;
 
   const idList = [];
   let structure;
@@ -26,34 +28,34 @@ export const createStructure = (items) => {
 
     item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
-        let currentGrandParent = accumulator.find((element) => element.name === cityEntity.name);
-        if(currentGrandParent && currentGrandParent.name === cityEntity.name) {
+        currentGrandParent = accumulator.find((element) => element.name === cityEntity.name);
+        if(currentGrandParent) {
           currentParent = currentGrandParent;
-          return;
         } else {
           let grandParent = createCityElement(currentId, cityEntity);
           accumulator.push(grandParent);
           idList.push(grandParent.id);
           ++currentId;
           currentParent = grandParent;
+          currentGrandParent = grandParent;
         }
       } else {
-        let currentChild = currentParent.children.find((element) => element.name === cityEntity.name);
-        if(currentChild && currentChild.name === cityEntity.name) {
+        currentChild = currentParent.children.find((element) => element.name === cityEntity.name);
+
+        if(currentChild) {
           currentParent = currentChild;
-          return;
         } else {
           const currentElement = createCityElement(currentId, cityEntity);
+          currentParent = currentElement;
 
-          currentParent.children.push(currentElement);
+          currentElement.children.push(currentElement);
           idList.push(currentElement.id);
 
           ++currentId;
-          currentParent = currentElement;
-          if(index === list.length - 1) {
-            const newCitizen = createCitizen(item);
-            currentParent.children.push(newCitizen);
-          }
+          // if(index === list.length - 1) {
+          //   const newCitizen = createCitizen(item);
+          //   currentElement.children.push(newCitizen);
+          // }
         }
       }
     });
