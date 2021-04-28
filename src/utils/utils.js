@@ -7,19 +7,21 @@ const createCityElement = (id, cityEntity) => {
   });
 };
 
-const createCitizen = (citizen) => {
-  return Object.assign({}, {
+const addNewCitizen = (citizen, indexItem, currentParentItem, items) => {
+  const newCitizen = Object.assign({}, {
     id: (citizen.id).toString().concat('-citizen'),
     type: 'citizen',
     name: citizen.name,
   });
+
+  if(indexItem === items.length - 1) {
+    currentParentItem.children.push(newCitizen);
+  }
 };
 
 export const createStructure = (items) => {
   let currentParent = null;
   let currentId = 0;
-  let currentGrandParent;
-  let currentChild;
 
   const idList = [];
   let structure;
@@ -28,7 +30,7 @@ export const createStructure = (items) => {
 
     item.groups.forEach((cityEntity, index, list) => {
       if(index === 0) {
-        currentGrandParent = accumulator.find((element) => element.name === cityEntity.name);
+        let currentGrandParent = accumulator.find((element) => element.name === cityEntity.name);
         if(currentGrandParent) {
           currentParent = currentGrandParent;
         } else {
@@ -37,25 +39,23 @@ export const createStructure = (items) => {
           idList.push(grandParent.id);
           ++currentId;
           currentParent = grandParent;
-          currentGrandParent = grandParent;
         }
       } else {
-        currentChild = currentParent.children.find((element) => element.name === cityEntity.name);
-
+        let currentChild = currentParent.children.find((element) => element.name === cityEntity.name);
         if(currentChild) {
           currentParent = currentChild;
+
+          addNewCitizen(item, index, currentParent, list);
         } else {
           const currentElement = createCityElement(currentId, cityEntity);
-          currentParent = currentElement;
 
-          currentElement.children.push(currentElement);
+          currentParent.children.push(currentElement);
           idList.push(currentElement.id);
 
           ++currentId;
-          // if(index === list.length - 1) {
-          //   const newCitizen = createCitizen(item);
-          //   currentElement.children.push(newCitizen);
-          // }
+          currentParent = currentElement;
+
+          addNewCitizen(item, index, currentParent, list);
         }
       }
     });
