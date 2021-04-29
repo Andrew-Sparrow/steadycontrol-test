@@ -18,6 +18,12 @@ const useStyles = makeStyles({
 export default function RecursiveTreeView(props) {
   const classes = useStyles();
 
+  const [expanded, setExpanded] = React.useState([]);
+
+  const handleToggle = (event, nodeIds) => {
+    setExpanded(nodeIds);
+  };
+
   const renderTree = (nodes) => {
     return (
       <TreeItem key={nodes.id} nodeId={(nodes.id)} label={nodes.name}>
@@ -41,8 +47,8 @@ export default function RecursiveTreeView(props) {
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
-      defaultExpanded={['0-cityItem', '1-cityItem', '2-cityItem', '3-cityItem', '4-cityItem']}
-      // defaultExpanded={props.expanded ? props.expanded : []}
+      expanded={props.expandedItem ? props.expandedItem : []}
+      onNodeToggle={handleToggle}
     >
       {renderParent(props.dataTree ? props.dataTree : [])}
     </TreeView>
@@ -51,6 +57,7 @@ export default function RecursiveTreeView(props) {
 
 RecursiveTreeView.propTypes = {
   dataTree: PropTypes.array,
+  expandedItem: PropTypes.array,
 };
 
 RecursiveTreeView.defaultProps = {

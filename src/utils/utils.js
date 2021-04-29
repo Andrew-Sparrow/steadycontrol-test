@@ -62,8 +62,6 @@ export const createStructure = (items) => {
     return accumulator;
   }, []);
 
-  console.log(structure);
-
   return {
     structure,
     idList
