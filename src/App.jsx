@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ContainedButtons from "./components/Button";
 
 import axios from 'axios';
 
@@ -7,6 +6,7 @@ import './App.css';
 import {createStructure} from "./utils/utils";
 
 import RecursiveTreeView from "./components/RecursiveTreeView";
+import ContainedButtons from "./components/Button";
 
 window.addEventListener('online', () => {
   document.title = document.title.replace(' [offline]', '');
@@ -55,7 +55,7 @@ const App = () => {
   return (
     <>
       {/*<RecursiveTreeView dataTree={dataStructure.structure} expandedItem={dataStructure.idList}/>*/}
-      <ContainedButtons />
+      {/*<ContainedButtons />*/}
       <RecursiveTreeView dataTree={dataStructure.structure} expandedItems={dataStructure.idList}/>
     </>
   );

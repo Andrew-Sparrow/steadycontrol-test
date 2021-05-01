@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons() {
+export default function ContainedButtons(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({isExpand: true});
 
@@ -18,6 +19,7 @@ export default function ContainedButtons() {
     setState(prevState => ({
       isExpand: !prevState.isExpand
     }));
+    props.expandEverything();
   };
 
   return (
@@ -28,3 +30,7 @@ export default function ContainedButtons() {
     </div>
   );
 }
+
+ContainedButtons.propTypes = {
+  expandEverything: PropTypes.func,
+};

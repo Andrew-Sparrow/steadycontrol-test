@@ -5,7 +5,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import React, {Component, useEffect} from "react";
 import PropTypes from 'prop-types';
-
+import ContainedButtons from "./Button";
 
 const useStyles = makeStyles({
   root: {
@@ -19,6 +19,11 @@ export default function RecursiveTreeView(props) {
   const classes = useStyles();
 
   const [expanded, setExpanded] = React.useState([]);
+
+  const setExpandAll = () => {
+    setExpanded(props.expandedItems)
+    // setExpanded(props.expandedItems ? props.expandedItems : expanded)
+  };
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
@@ -43,22 +48,24 @@ export default function RecursiveTreeView(props) {
   };
 
   return (
-    <TreeView
-      className={classes.root}
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      expanded={expanded}
-      // expanded={props.expandedItem ? props.expandedItem : expanded}
-      onNodeToggle={handleToggle}
-    >
-      {renderParent(props.dataTree)}
-    </TreeView>
+    <>
+      <ContainedButtons expandEverything={setExpandAll}/>
+      <TreeView
+        className={classes.root}
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+        expanded={expanded}
+        onNodeToggle={handleToggle}
+      >
+        {renderParent(props.dataTree)}
+      </TreeView>
+    </>
   );
 }
 
 RecursiveTreeView.propTypes = {
   dataTree: PropTypes.array,
-  // expandedItems: PropTypes.array,
+  expandedItems: PropTypes.array,
 };
 
 RecursiveTreeView.defaultProps = {
