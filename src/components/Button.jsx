@@ -19,7 +19,7 @@ export default function ContainedButtons(props) {
     setState(prevState => ({
       isExpand: !prevState.isExpand
     }));
-    props.expandEverything();
+    state.isExpand ? props.expandEverything() : props.collapseEverything();
   };
 
   return (
@@ -33,4 +33,5 @@ export default function ContainedButtons(props) {
 
 ContainedButtons.propTypes = {
   expandEverything: PropTypes.func,
+  collapseEverything: PropTypes.func,
 };

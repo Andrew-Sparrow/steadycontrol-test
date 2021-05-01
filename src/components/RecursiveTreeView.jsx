@@ -22,7 +22,10 @@ export default function RecursiveTreeView(props) {
 
   const setExpandAll = () => {
     setExpanded(props.expandedItems)
-    // setExpanded(props.expandedItems ? props.expandedItems : expanded)
+  };
+
+  const setCollapseAll = () => {
+    setExpanded([]);
   };
 
   const handleToggle = (event, nodeIds) => {
@@ -49,7 +52,7 @@ export default function RecursiveTreeView(props) {
 
   return (
     <>
-      <ContainedButtons expandEverything={setExpandAll}/>
+      <ContainedButtons expandEverything={setExpandAll} collapseEverything={setCollapseAll}/>
       <TreeView
         className={classes.root}
         defaultCollapseIcon={<ExpandMoreIcon />}

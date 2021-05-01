@@ -6,7 +6,6 @@ import './App.css';
 import {createStructure} from "./utils/utils";
 
 import RecursiveTreeView from "./components/RecursiveTreeView";
-import ContainedButtons from "./components/Button";
 
 window.addEventListener('online', () => {
   document.title = document.title.replace(' [offline]', '');
@@ -54,8 +53,6 @@ const App = () => {
 
   return (
     <>
-      {/*<RecursiveTreeView dataTree={dataStructure.structure} expandedItem={dataStructure.idList}/>*/}
-      {/*<ContainedButtons />*/}
       <RecursiveTreeView dataTree={dataStructure.structure} expandedItems={dataStructure.idList}/>
     </>
   );
