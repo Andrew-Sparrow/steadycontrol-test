@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ContainedButtons from "./components/Button";
 
 import axios from 'axios';
 
@@ -54,7 +55,8 @@ const App = () => {
   return (
     <>
       {/*<RecursiveTreeView dataTree={dataStructure.structure} expandedItem={dataStructure.idList}/>*/}
-      <RecursiveTreeView dataTree={dataStructure.structure} expandedItem={dataStructure.idList}/>
+      <ContainedButtons />
+      <RecursiveTreeView dataTree={dataStructure.structure} expandedItems={dataStructure.idList}/>
     </>
   );
 };

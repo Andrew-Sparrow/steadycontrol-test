@@ -3,7 +3,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import React from "react";
+import React, {Component, useEffect} from "react";
 import PropTypes from 'prop-types';
 
 
@@ -48,6 +48,7 @@ export default function RecursiveTreeView(props) {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={expanded}
+      // expanded={props.expandedItem ? props.expandedItem : expanded}
       onNodeToggle={handleToggle}
     >
       {renderParent(props.dataTree)}
@@ -57,6 +58,7 @@ export default function RecursiveTreeView(props) {
 
 RecursiveTreeView.propTypes = {
   dataTree: PropTypes.array,
+  // expandedItems: PropTypes.array,
 };
 
 RecursiveTreeView.defaultProps = {
