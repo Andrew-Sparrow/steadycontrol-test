@@ -12,19 +12,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContainedButtons() {
   const classes = useStyles();
-  const [state, setState] = React.useState({isToggleOn: true});
+  const [state, setState] = React.useState({isExpand: true});
 
   const handleToggle = () => {
     setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
+      isExpand: !prevState.isExpand
     }));
   };
 
   return (
     <div className={classes.root}>
-      {/*<Button variant="contained" color="primary" onClick={() => { alert('clicked') }}>*/}
       <Button variant="contained" color="primary" onClick={() => handleToggle()}>
-        {state.isToggleOn ? 'Collapse All' : 'Expand All'}
+        {state.isExpand ? 'Expand All' : 'Collapse All'}
       </Button>
     </div>
   );
