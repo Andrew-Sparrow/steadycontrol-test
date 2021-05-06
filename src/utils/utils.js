@@ -3,7 +3,6 @@ import nanoid from "nanoid";
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
     id: nanoid(),
-    keyID: nanoid(),
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],
@@ -13,8 +12,6 @@ const createCityElement = (id, cityEntity) => {
 const addNewCitizen = (citizen, indexItem, currentParentItem, items) => {
   const newCitizen = Object.assign({}, {
     keyID: nanoid(),
-    nodeID: nanoid(),
-    tooltipID: nanoid(),
     type: 'citizen',
     name: citizen.name,
   });
