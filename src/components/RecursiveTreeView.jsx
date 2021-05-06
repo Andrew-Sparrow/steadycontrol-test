@@ -34,7 +34,6 @@ export default function RecursiveTreeView(props) {
   };
 
   const renderTree = (node) => {
-    console.log(node);
     return (
       Array.isArray(node.children) ?
         <TreeItem key={node.id} nodeId={(node.id)} label={node.name}>

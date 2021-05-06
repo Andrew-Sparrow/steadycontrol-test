@@ -46,7 +46,6 @@ const App = () => {
       const citizensFromServer = await fetchCitizens();
       setCitizens(citizensFromServer);
       setDataStructure(getStructure(citizensFromServer));
-      console.log(getStructure(citizensFromServer).structure);
     };
 
     getCitizens();
