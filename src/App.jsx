@@ -44,8 +44,10 @@ const App = () => {
   useEffect(() => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
+      console.log(citizensFromServer);
       setCitizens(citizensFromServer);
       setDataStructure(getStructure(citizensFromServer));
+      console.log(getStructure(citizensFromServer).structure);
     };
 
     getCitizens();

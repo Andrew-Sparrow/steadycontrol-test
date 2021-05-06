@@ -2,7 +2,7 @@ import nanoid from "nanoid";
 
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
-    id: nanoid(),
+    id: id.toString(),
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],

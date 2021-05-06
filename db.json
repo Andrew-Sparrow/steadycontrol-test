@@ -267,7 +267,7 @@
     {
       "id": 13,
       "name": "Валентин",
-      "city_id": 2,
+      "city_id": 3,
       "groups": [
         {
           "type": "city",
