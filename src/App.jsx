@@ -44,10 +44,8 @@ const App = () => {
   useEffect(() => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
-      console.log(citizensFromServer);
       setCitizens(citizensFromServer);
       setDataStructure(getStructure(citizensFromServer));
-      console.log(getStructure(citizensFromServer).structure);
     };
 
     getCitizens();
@@ -55,7 +53,11 @@ const App = () => {
 
   return (
     <>
-      <RecursiveTreeView dataTree={dataStructure.structure} expandedItems={dataStructure.idList}/>
+      <RecursiveTreeView
+        dataTree={dataStructure.structure}
+        expandedItems={dataStructure.idList}
+        citiesList={cities}
+      />
     </>
   );
 };
