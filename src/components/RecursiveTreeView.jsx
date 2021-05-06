@@ -41,7 +41,7 @@ export default function RecursiveTreeView(props) {
              node.children.map((item) => renderTree(item))
           }
         </TreeItem>
-      : <Citizen key={node.keyID} nodeIdItem={node.keyID} labelItem={node.name}/>
+      : <Citizen key={node.keyID} nodeIdItem={node.keyID} labelItem={node.name} cityId={node.cityID}/>
     );
   };
 

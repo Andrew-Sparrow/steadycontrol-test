@@ -12,6 +12,7 @@ const createCityElement = (id, cityEntity) => {
 const addNewCitizen = (citizen, indexItem, currentParentItem, items) => {
   const newCitizen = Object.assign({}, {
     keyID: nanoid(),
+    cityID: citizen.city_id,
     type: 'citizen',
     name: citizen.name,
   });

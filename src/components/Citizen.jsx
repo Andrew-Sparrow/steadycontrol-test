@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export default function Citizen(props) {
 
   return (
-    <Tooltip title="Citizen" placement="top-start" aria-label="citizen">
+    <Tooltip title={props.cityId} placement="top-start" aria-label="citizen">
       <TreeItem nodeId={props.nodeIdItem} label={props.labelItem} />
     </Tooltip>
   );
@@ -15,4 +15,5 @@ export default function Citizen(props) {
 Citizen.propTypes = {
   nodeIdItem: PropTypes.string,
   labelItem: PropTypes.string,
+  cityId: PropTypes.number,
 };
