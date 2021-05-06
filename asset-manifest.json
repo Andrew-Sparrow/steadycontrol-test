@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/steadycontrol-test/static/css/main.1037b1a7.chunk.css",
+    "main.js": "/steadycontrol-test/static/js/main.8542ee12.chunk.js",
+    "main.js.map": "/steadycontrol-test/static/js/main.8542ee12.chunk.js.map",
+    "runtime-main.js": "/steadycontrol-test/static/js/runtime-main.fff7d6de.js",
+    "runtime-main.js.map": "/steadycontrol-test/static/js/runtime-main.fff7d6de.js.map",
+    "static/js/2.c23d0f4c.chunk.js": "/steadycontrol-test/static/js/2.c23d0f4c.chunk.js",
+    "static/js/2.c23d0f4c.chunk.js.map": "/steadycontrol-test/static/js/2.c23d0f4c.chunk.js.map",
+    "index.html": "/steadycontrol-test/index.html",
+    "static/css/main.1037b1a7.chunk.css.map": "/steadycontrol-test/static/css/main.1037b1a7.chunk.css.map",
+    "static/js/2.c23d0f4c.chunk.js.LICENSE.txt": "/steadycontrol-test/static/js/2.c23d0f4c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fff7d6de.js",
+    "static/js/2.c23d0f4c.chunk.js",
+    "static/css/main.1037b1a7.chunk.css",
+    "static/js/main.8542ee12.chunk.js"
+  ]
+}
