@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import './App.css';
-import {createStructure} from "./utils/utils";
+import {getStructure} from "./utils/utils";
 
 import RecursiveTreeView from "./components/RecursiveTreeView";
 
@@ -45,7 +45,8 @@ const App = () => {
     const getCitizens = async () => {
       const citizensFromServer = await fetchCitizens();
       setCitizens(citizensFromServer);
-      setDataStructure(createStructure(citizensFromServer));
+      setDataStructure(getStructure(citizensFromServer));
+      console.log(getStructure(citizensFromServer).structure);
     };
 
     getCitizens();

@@ -1,6 +1,9 @@
+import nanoid from "nanoid";
+
 const createCityElement = (id, cityEntity) => {
   return Object.assign({}, {
-    id: id.toString().concat('-cityItem'),
+    id: nanoid(),
+    keyID: nanoid(),
     type: cityEntity.type,
     name: cityEntity.name,
     children: [],
@@ -9,7 +12,9 @@ const createCityElement = (id, cityEntity) => {
 
 const addNewCitizen = (citizen, indexItem, currentParentItem, items) => {
   const newCitizen = Object.assign({}, {
-    id: (citizen.id).toString().concat('-citizen'),
+    keyID: nanoid(),
+    nodeID: nanoid(),
+    tooltipID: nanoid(),
     type: 'citizen',
     name: citizen.name,
   });
@@ -19,7 +24,7 @@ const addNewCitizen = (citizen, indexItem, currentParentItem, items) => {
   }
 };
 
-export const createStructure = (items) => {
+export const getStructure = (items) => {
   let currentParent = null;
   let currentId = 0;
 

@@ -3,9 +3,10 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import React, {Component, useEffect} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import ContainedButtons from "./Button";
+import Citizen from "./Citizen";
 
 const useStyles = makeStyles({
   root: {
@@ -32,19 +33,24 @@ export default function RecursiveTreeView(props) {
     setExpanded(nodeIds);
   };
 
-  const renderTree = (nodes) => {
+  const renderTree = (node) => {
+    console.log(node);
     return (
-      <TreeItem key={nodes.id} nodeId={(nodes.id)} label={nodes.name}>
-        {(Array.isArray(nodes.children) || ((Array.isArray(nodes.children) && nodes.children.length !== 0))) ? nodes.children.map((node) => renderTree(node)) : null}
-      </TreeItem>
+      Array.isArray(node.children) ?
+        <TreeItem key={node.id} nodeId={(node.id)} label={node.name}>
+          {
+             node.children.map((item) => renderTree(item))
+          }
+        </TreeItem>
+      : <Citizen key={node.nodeID} nodeIdItem={node.nodeID} tooltipId={node.tooltipID} labelItem={node.name}/>
     );
   };
 
   const renderParent = (items) => {
     return items.map((item) => {
       return (
-        <TreeItem key={item.id} nodeId={(item.id)} label={item.name} >
-          {(item.children.length !== 0) ? item.children.map((child) => renderTree(child)) : null}
+        <TreeItem key={item.id} nodeId={item.id} label={item.name} >
+          {item.children && (item.children.length !== 0) ? item.children.map((child) => renderTree(child)) : null}
         </TreeItem>
       )
     });
