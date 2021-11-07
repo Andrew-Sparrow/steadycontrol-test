@@ -21,6 +21,7 @@ const App = () => {
   const [dataStructure, setDataStructure] = useState([]);
 
   const fetchCities = async () => {
+    // const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/cities`);
     const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/cities`);
 
     return response.data;
@@ -36,7 +37,8 @@ const App = () => {
   }, []);
 
   const fetchCitizens = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/citizens`);
+    // const response = await axios.get(`${process.env.REACT_APP_API_PATH}:${process.env.REACT_APP_API_PORT}/citizens`);
+    const response = await axios.get(`https://run.mocky.io/v3/df9ff11c-6550-490c-904c-8eed5e64fabd`);
 
     return response.data;
   };
